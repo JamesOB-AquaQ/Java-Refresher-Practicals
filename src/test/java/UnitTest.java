@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UnitTest {
@@ -46,6 +45,30 @@ public class UnitTest {
                 "Exiting game."));
     }
     @Test
+    public void testMainCheckAnagram_EmptyFirstInputStringsAreAnagrams()  {
+        testInput = "2\n\ninch\nchin\n5";
+        in = new ByteArrayInputStream(testInput.getBytes());
+        System.setIn(in);
+
+        Main.main(null);
+
+        assertTrue(outputStreamCaptor.toString().contains("The two strings are anagrams"));
+        assertTrue(outputStreamCaptor.toString().trim().endsWith("Exiting game."));
+        assertTrue(outputStreamCaptor.toString().contains("Enter first string and hit enter: \nEmpty string entered. Please enter a valid non-empty string:\n"));
+    }
+    @Test
+    public void testMainCheckAnagram_EmptySecondInputStringsAreAnagrams()  {
+        testInput = "2\ninch\n\nchin\n5";
+        in = new ByteArrayInputStream(testInput.getBytes());
+        System.setIn(in);
+
+        Main.main(null);
+
+        assertTrue(outputStreamCaptor.toString().contains("The two strings are anagrams"));
+        assertTrue(outputStreamCaptor.toString().trim().endsWith("Exiting game."));
+        assertTrue(outputStreamCaptor.toString().contains("Enter second string and hit enter: \nEmpty string entered. Please enter a valid non-empty string:\n"));
+    }
+    @Test
     public void testMainCheckAnagram_InputStringsDifferentLengths()  {
         testInput = "2\ninches\nchin\n5";
         in = new ByteArrayInputStream(testInput.getBytes());
@@ -58,7 +81,7 @@ public class UnitTest {
                 "Exiting game."));
     }
     @Test
-    public void testMainCheckAnagram_InputStringsNotAnagramsSameLength()  {
+    public void testMainCheckAnagram_InputStringsSameLengthNotAnagrams()  {
         testInput = "2\ninch\nchip\n5";
         in = new ByteArrayInputStream(testInput.getBytes());
         System.setIn(in);
@@ -95,7 +118,7 @@ public class UnitTest {
                 "Exiting game."));
     }
     @Test
-    public void testMainFindMaxChar()  {
+    public void testMainFindMaxChar_ValidInitialInput()  {
         testInput = "1\nmillennium\n5";
         in = new ByteArrayInputStream(testInput.getBytes());
         System.setIn(in);
@@ -107,7 +130,7 @@ public class UnitTest {
                 "Exiting game."));
     }
     @Test
-    public void testMainReverseString()  {
+    public void testMainReverseString_ValidFirstInput()  {
         testInput = "3\nbicycle\n5";
         in = new ByteArrayInputStream(testInput.getBytes());
         System.setIn(in);
@@ -119,7 +142,7 @@ public class UnitTest {
                 "Exiting game."));
     }
     @Test
-    public void testMainFindMaxOccurringChar_ShouldPrintEmptyStringMessageThenReturnMaxChar(){
+    public void testMainFindMaxOccurringChar_EmptyInitialInput(){
         testInput = "1\n\nmillennium\n5";
         in = new ByteArrayInputStream(testInput.getBytes());
         System.setIn(in);
@@ -131,7 +154,7 @@ public class UnitTest {
         assertTrue(outputStreamCaptor.toString().trim().endsWith("Exiting game."));
     }
     @Test
-    public void testMain_UnavailableOptionSelected()  {
+    public void testMain_UnavailableMenuOptionSelected()  {
         testInput = "6\n5";
         in = new ByteArrayInputStream(testInput.getBytes());
         System.setIn(in);
@@ -139,6 +162,17 @@ public class UnitTest {
         Main.main(null);
 
         assertTrue(outputStreamCaptor.toString().contains("Option not available, please try again!"));
+        assertTrue(outputStreamCaptor.toString().trim().endsWith(
+                "Exiting game."));
+    }
+    @Test
+    public void testMain_ExitOptionSelected()  {
+        testInput = "5";
+        in = new ByteArrayInputStream(testInput.getBytes());
+        System.setIn(in);
+
+        Main.main(null);
+
         assertTrue(outputStreamCaptor.toString().trim().endsWith(
                 "Exiting game."));
     }
