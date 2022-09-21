@@ -30,7 +30,7 @@ public class StringEvaluation {
             if (!enteredText.isEmpty()) {
                 return enteredText;
             } else {
-                System.out.println("Empty string entered. Please enter a valid non-empty string: ");
+                System.out.println("Empty string entered. Please enter a valid non-empty string:");
             }
         }
     }
