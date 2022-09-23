@@ -30,7 +30,7 @@ public class StringEvaluation {
             if (!enteredText.isEmpty()) {
                 return enteredText;
             } else {
-                System.out.println("Empty string entered. Please enter a valid non-empty string: ");
+                System.out.println("Empty string entered. Please enter a valid non-empty string:");
             }
         }
     }
@@ -88,9 +88,6 @@ public class StringEvaluation {
         System.out.println("Enter string to check and hit enter");
 
         String text = readStringWithEmptyCheck(sc).replaceAll("\\s|[^a-zA-Z0-9]","").toLowerCase();;
-
-        if (text.charAt(0) != text.charAt(text.length() - 1))
-            return false;
 
         for (int i = 0; i < text.length() / 2; i++) {
             if (text.charAt(i) != text.charAt(text.length() - i - 1))
