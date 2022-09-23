@@ -19,7 +19,7 @@ public class StringExerciseMenu {
         this.stringEvaluation = stringEvaluation;
     }
 
-    public static void handleUserInput(Scanner scanner) {
+    public void handleUserInput(Scanner scanner) {
         System.out.println("Welcome to the String Exercise Menu, please select an option:");
         String selected;
 
